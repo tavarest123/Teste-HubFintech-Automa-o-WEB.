@@ -21,3 +21,15 @@ end
 Então("devo ver os dados do usuário cadastrado e a mensagem {string}") do |confirmacao|
   expect(page).to have_text confirmacao
 end
+
+Quando("eu preencho os dados {string}, {string} e {string}") do |nome, sobrenome, email|
+  visit "/new"
+  find("#user_name").set nome
+  find("#user_lastname").set sobrenome
+  find("#user_email").set email
+  click_button "Criar"
+end
+
+Então("devo ver a mensagem de alerta {string}") do |menssagem_erro|
+  expect(page).to have_text menssagem_erro
+end
